@@ -4,6 +4,7 @@ const { Sequelize } = require("sequelize");
 const sequelize = new Sequelize("quizsystem", "root", "Linhrio@69", {
   host: "localhost",
   dialect: "mysql",
+  logging: false,
 });
 let connectDB = async () => {
   try {
