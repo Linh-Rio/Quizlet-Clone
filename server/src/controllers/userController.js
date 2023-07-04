@@ -1,13 +1,28 @@
-import db from "../models/index";
 import userService from "../services/userService";
 
 // signup controller
 let handleSignUp = async (req, res) => {
-  await userService.hanldeUserSignUp(req.body);
+  // 6 attributes (firstName, lastName, userName, email, password, birthday)
+  console.log(checkAllValues(req.body));
+  if (checkAllValues(req.body)) {
+    return res.status(500).json({
+      errCode: 1,
+      message: "Missing inputs parameter!",
+      user: {},
+    });
+  }
+  let userData = await userService.hanldeUserSignUp(req.body);
   return res.status(200).json({
-    errCode: 0,
-    message: "create user successfully",
+    errCode: userData.errCode,
+    message: userData.errMessage,
+    user: userData.user ? userData.user : {},
   });
+};
+let checkAllValues = (obj) => {
+  let values = Object.values(obj);
+  return !values.every(
+    (value) => value !== undefined && value !== null && value !== ""
+  );
 };
 
 // login controller
@@ -18,7 +33,7 @@ let handleLogin = async (req, res) => {
   if (!email || !password) {
     return res.status(500).json({
       errCode: 1,
-      errMessage: "Missing inputs parameter!",
+      message: "Missing inputs parameter!",
       user: {},
     });
   }

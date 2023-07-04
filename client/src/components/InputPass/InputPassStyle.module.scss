@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  position: relative;
+  width: 100%;
+}
+
+.input {
+  background-color: #eee;
+  border: none;
+  padding: 12px 15px;
+  margin: 8px 0;
+  width: 100%;
+}
+
+.show-btn {
+  position: absolute;
+  font-size: 1.6rem;
+  right: 0;
+  bottom: 25%;
+  padding-right: 9px;
+}

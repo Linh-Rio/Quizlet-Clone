@@ -1,4 +1,4 @@
-import bcrypt, { hash } from "bcryptjs";
+import bcrypt from "bcryptjs";
 
 import db from "../models";
 
@@ -8,18 +8,60 @@ const salt = bcrypt.genSaltSync(12);
 let hanldeUserSignUp = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      let hashPassword = await useHashPassword(data.password);
-      await db.User.create({
-        email: data.email,
-        userName: data.userName,
-        password: hashPassword,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        birthday: data.birthday,
-      });
-      resolve("create new user succeed");
+      let userData = {};
+      let isExist = await checkUserEmail(data.email);
+
+      if (!isExist) {
+        isExist = await checkUserName(data.userName);
+        if (!isExist) {
+          let hashPassword = await useHashPassword(data.password);
+          let user = (
+            await db.User.create({
+              email: data.email,
+              userName: data.userName,
+              password: hashPassword,
+              firstName: data.firstName,
+              lastName: data.lastName,
+              birthday: data.birthday,
+            })
+          ).get({ raw: true });
+
+          userData.errCode = 0;
+          userData.errMessage = "ok";
+          // remove id, pass, time before assign for userData
+          let keysToDelete = ["id", "password", "updatedAt", "createdAt"];
+          for (let key of keysToDelete) {
+            delete user[key];
+          }
+          userData.user = user;
+        } else {
+          userData.errCode = 2;
+          userData.errMessage = `Your's username is exist`;
+        }
+      } else {
+        userData.errCode = 1;
+        userData.errMessage = `Your's email is exist`;
+      }
+      resolve(userData);
     } catch (error) {
       reject(error);
+    }
+  });
+};
+
+let checkUserName = (userName) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let user = await db.User.findOne({
+        where: { userName },
+      });
+      if (user) {
+        resolve(true);
+      } else {
+        resolve(false);
+      }
+    } catch (e) {
+      reject(e);
     }
   });
 };
