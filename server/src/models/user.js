@@ -9,6 +9,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      User.hasMany(models.VocabSet, { foreignKey: "user_id" });
+      User.belongsToMany(models.VocabSet, { through: "Learn" });
     }
   }
   User.init(
@@ -19,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       firstName: DataTypes.STRING,
       lastName: DataTypes.STRING,
       birthday: DataTypes.DATEONLY,
+      avartar: DataTypes.BLOB("long"),
     },
     {
       sequelize,

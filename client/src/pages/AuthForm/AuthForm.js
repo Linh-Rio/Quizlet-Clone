@@ -1,11 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames/bind';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faEye,
-  faEyeSlash,
-} from '@fortawesome/free-regular-svg-icons';
 
 import styles from './AuthFormStyles.module.scss';
 import {
@@ -39,6 +34,7 @@ const AuthForm = () => {
       setErrMessage('');
       setEmail('');
       setPassword('');
+      setConfirmPass('');
       setActivePanel('right-panel-active');
     });
 
@@ -111,8 +107,8 @@ const AuthForm = () => {
     <div className={cx('Auth-container')}>
       <div className={cx('container', activePanel)} id="container">
         <div className={cx('form-container', 'sign-up-container')}>
-          <form>
-            <h1>Create Account</h1>
+          <form className={cx('form')}>
+            <h1 className={cx('h1')}>Create Account</h1>
             {/* <div className={cx('social-container')}>
               <a className={cx('social')}>
                 <i className={cx('fab', 'fa-facebook-f')}></i>
@@ -188,18 +184,25 @@ const AuthForm = () => {
                 setBirthday(e.target.value);
               }}
             />
-            <span style={{ color: 'red', paddingBottom: '7px' }}>
+            <span
+              className={cx('span')}
+              style={{ color: 'red', paddingBottom: '7px' }}
+            >
               {errMessage}
             </span>
-            <button type="button" onClick={handleOnSignUp}>
+            <button
+              className={cx('button')}
+              type="button"
+              onClick={handleOnSignUp}
+            >
               Sign Up
             </button>
           </form>
         </div>
 
         <div className={cx('form-container', 'sign-in-container')}>
-          <form action="#">
-            <h1>Sign in</h1>
+          <form action="#" className={cx('form')}>
+            <h1 className={cx('h1')}>Sign in</h1>
             {/* <div className={cx('social-container')}>
               <a href="#" className={cx('social')}>
                 <i className={cx('fab', 'fa-facebook-f')}></i>
@@ -228,32 +231,42 @@ const AuthForm = () => {
               placeholder={'Password'}
             />
 
-            <span style={{ color: 'red', paddingBottom: '7px' }}>
+            <span
+              className={cx('span')}
+              style={{ color: 'red', paddingBottom: '7px' }}
+            >
               {errMessage}
             </span>
-            <button onClick={handleClickSignin}>Sign In</button>
-            <a href="#">Forgot your password?</a>
+            <button
+              className={cx('button')}
+              onClick={handleClickSignin}
+            >
+              Sign In
+            </button>
+            <a className={cx('a')} href="/reset-password">
+              Forgot your password?
+            </a>
           </form>
         </div>
 
         <div className={cx('overlay-container')}>
           <div className={cx('overlay')}>
             <div className={cx('overlay-panel', 'overlay-left')}>
-              <h1>Welcome Back!</h1>
-              <p>
+              <h1 className={cx('h1')}>Welcome Back!</h1>
+              <p className={cx('p')}>
                 To keep connected with us please login with your
                 personal info
               </p>
-              <button className={cx('ghost')} id="signIn">
+              <button className={cx('button', 'ghost')} id="signIn">
                 Sign In
               </button>
             </div>
             <div className={cx('overlay-panel', 'overlay-right')}>
-              <h1>Hello, Friend!</h1>
-              <p>
+              <h1 className={cx('h1')}>Hello, Friend!</h1>
+              <p className={cx('p')}>
                 Enter your personal details and start journey with us
               </p>
-              <button className={cx('ghost')} id="signUp">
+              <button className={cx('button', 'ghost')} id="signUp">
                 Sign Up
               </button>
             </div>

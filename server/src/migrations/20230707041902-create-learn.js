@@ -2,21 +2,14 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("VocabSets", {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER,
-      },
-      title: {
-        type: Sequelize.STRING,
-      },
-      description: {
-        type: Sequelize.TEXT,
-      },
+    await queryInterface.createTable("Learns", {
       user_id: {
         type: Sequelize.INTEGER,
+        primaryKey: true,
+      },
+      vocabset_id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
       },
       createdAt: {
         allowNull: false,
@@ -27,11 +20,21 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
-
-    await queryInterface.addConstraint("VocabSets", {
+    await queryInterface.addConstraint("Learns", {
+      fields: ["vocabset_id"],
+      type: "foreign key",
+      name: "fk_vocabsetm_id",
+      references: {
+        table: "VocabSets",
+        field: "id",
+      },
+      onUpdate: "CASCADE",
+      onDelete: "CASCADE",
+    });
+    await queryInterface.addConstraint("Learns", {
       fields: ["user_id"],
       type: "foreign key",
-      name: "fk_user_id",
+      name: "fk_usern_id",
       references: {
         table: "Users",
         field: "id",
@@ -41,6 +44,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("VocabSets");
+    await queryInterface.dropTable("Learns");
   },
 };

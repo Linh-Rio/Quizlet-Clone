@@ -11,9 +11,11 @@ module.exports = {
       },
       email: {
         type: Sequelize.STRING,
+        unique: true,
       },
       userName: {
         type: Sequelize.STRING,
+        unique: true,
       },
       password: {
         type: Sequelize.STRING,
@@ -26,6 +28,9 @@ module.exports = {
       },
       birthday: {
         type: Sequelize.DATEONLY,
+      },
+      avatar: {
+        type: Sequelize.BLOB("long"),
       },
       createdAt: {
         allowNull: false,

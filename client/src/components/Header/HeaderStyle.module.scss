@@ -1,0 +1,184 @@
+.container {
+  width: 100%;
+  height: 64px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 0.0625rem solid #edeff4;
+  background-color: aliceblue;
+  padding: 0 16px;
+}
+.navigation {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: space-around;
+  color: rgb(0, 140, 255) !important;
+}
+
+.homepage,
+.library {
+  padding: 0px 10px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.logo {
+  width: 64px;
+  height: 100%;
+  cursor: pointer;
+  background-image: url('../../assets/images/quiz-logo.png');
+  background-size: cover;
+}
+
+.search-bar {
+  width: 30vw;
+}
+
+.icon-container,
+.login-container {
+  height: 100%;
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding-right: 28px;
+}
+.create,
+.notice {
+  font-size: 4rem;
+  padding: 0 16px;
+  color: rgb(0, 140, 255);
+  cursor: pointer;
+}
+
+.create:hover,
+.notice:hover {
+  color: rgb(0, 68, 255);
+}
+
+.create:active,
+.notice:active {
+  transform: scale(0.95);
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: 0 16px;
+  background-size: cover;
+}
+
+.avatar-container {
+  display: flex;
+  flex-direction: column;
+  background-color: aliceblue;
+  border: 0.0625rem solid #edeff4;
+  border-radius: 7px;
+  box-shadow: 0 0.25rem 1rem 0 #2e385614;
+}
+
+.avatar-container :hover {
+  background-color: rgb(232, 241, 250);
+}
+
+.profile-tag {
+  display: grid;
+  grid-template-areas:
+    'profile-avatar username'
+    'profile-avatar profile-email';
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #bebfc4;
+}
+.profile-tag:hover,
+.profile-avatar:hover,
+.username:hover,
+.profile-email:hover {
+  background-color: aliceblue;
+}
+
+.profile-avatar {
+  grid-area: profile-avatar;
+  height: 40px;
+  width: 40px;
+  margin: 5px;
+  border-radius: 50%;
+}
+
+.username {
+  grid-area: username;
+  padding-top: 5px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.profile-email {
+  grid-area: profile-email;
+  font-size: 1.2rem;
+  padding-bottom: 5px;
+}
+
+.btn {
+  width: 220px;
+  height: 40px;
+  color: rgb(0, 140, 255);
+  border: none;
+  background: none;
+  border-top: 0.0625rem solid #edeff4;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.icon {
+  font-size: 2rem;
+  padding-right: 18px;
+}
+
+.name {
+  font-size: 1.4rem;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.Button {
+  border-radius: 10px;
+  border: none;
+  background-color: aliceblue;
+  color: #333;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 15px;
+  letter-spacing: 1px;
+  margin: 0 10px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+
+  // box-shadow: 0 0.25rem 1rem 0 #2e385614;
+  cursor: pointer;
+}
+
+.Button:hover {
+  background-color: rgb(231, 232, 233);
+}
+
+.Button:active {
+  transform: scale(0.95);
+}
+
+.yellow {
+  background-color: rgb(255, 230, 0);
+}
+
+.yellow:hover {
+  background-color: rgb(255, 245, 0);
+}

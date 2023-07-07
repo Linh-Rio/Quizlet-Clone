@@ -1,7 +1,6 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
   class FlashCard extends Model {
     /**
@@ -11,15 +10,20 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      FlashCard.belongsTo(models.Vocabset, { foreignKey: "vocabset_id" });
     }
   }
-  FlashCard.init({
-    vocabSetId: DataTypes.INTEGER,
-    front: DataTypes.TEXT,
-    back: DataTypes.TEXT
-  }, {
-    sequelize,
-    modelName: 'FlashCard',
-  });
+  FlashCard.init(
+    {
+      front: DataTypes.TEXT,
+      back: DataTypes.TEXT,
+      image: DataTypes.BLOB("long"),
+      vocabset_id: DataTypes.INTEGER,
+    },
+    {
+      sequelize,
+      modelName: "FlashCard",
+    }
+  );
   return FlashCard;
 };
