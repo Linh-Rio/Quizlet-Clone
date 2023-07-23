@@ -1,9 +1,11 @@
+import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
 import db from "../models";
 
 //signup service
 const salt = bcrypt.genSaltSync(12);
+const secretKey = "6969";
 
 let hanldeUserSignUp = async (data) => {
   return new Promise(async (resolve, reject) => {
@@ -23,11 +25,19 @@ let hanldeUserSignUp = async (data) => {
               firstName: data.firstName,
               lastName: data.lastName,
               birthday: data.birthday,
+              avatar: data.avatar ? data.avatar : null,
             })
           ).get({ raw: true });
 
+          let token = jwt.sign(
+            { id: user.id, username: user.userName },
+            secretKey,
+            { expiresIn: "1h" }
+          );
+
           userData.errCode = 0;
           userData.errMessage = "ok";
+          userData.token = token;
           // remove id, pass, time before assign for userData
           let keysToDelete = ["id", "password", "updatedAt", "createdAt"];
           for (let key of keysToDelete) {
@@ -89,12 +99,14 @@ let handleUserLogin = (email, password) => {
         // compare password
         let user = await db.User.findOne({
           attributes: [
+            "id",
             "email",
             "password",
             "userName",
             "firstName",
             "lastName",
             "birthday",
+            "avatar",
           ],
           where: { email: email },
           raw: true,
@@ -104,7 +116,13 @@ let handleUserLogin = (email, password) => {
           if (check) {
             userData.errCode = 0;
             userData.errMessage = "ok";
+            let token = jwt.sign(
+              { id: user.id, username: user.userName },
+              secretKey,
+              { expiresIn: "1h" }
+            );
 
+            userData.token = token;
             delete user.password;
             userData.user = user;
           } else {

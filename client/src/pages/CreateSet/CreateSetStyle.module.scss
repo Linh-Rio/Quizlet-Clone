@@ -1,0 +1,71 @@
+.container {
+  width: 100%;
+  margin-top: 64px;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  font-weight: bold;
+  font-size: 2rem;
+  padding: 30px 5%;
+  background-color: #f6f7fb;
+  border-bottom: 2px solid #838383;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+}
+
+.header > span {
+  padding-left: 1.5rem;
+}
+
+.study-set-container {
+  padding: 0 5%;
+}
+
+.Button {
+  border-radius: 10px;
+  border: none;
+  background-color: rgb(66, 85, 255);
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 15px;
+  letter-spacing: 1px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.Button:hover {
+  background-color: rgb(66, 84, 230);
+}
+
+.Button:active {
+  transform: scale(0.95);
+}
+
+.add-card {
+  width: 100%;
+  height: fit-content;
+  padding: 20px 0;
+  margin-top: 10px;
+  margin-bottom: 40px;
+  background-color: white;
+  text-align: center;
+  font-weight: bold;
+}
+
+.add-card > span {
+  color: rgb(75, 75, 75);
+  padding-bottom: 1rem;
+  border-bottom: 5px solid #51cfff;
+}
+
+.add-card > span:hover {
+  color: rgb(255, 196, 0);
+  border-bottom: 5px solid rgb(255, 196, 0);
+}

@@ -1,0 +1,43 @@
+.container {
+  height: 160px;
+  border-radius: 9px;
+  padding: 15px;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 0.25rem 1rem 0 #232b4214;
+}
+.container:active {
+  transform: scale(0.95);
+}
+.container:hover {
+  border-bottom: 3px solid rgba(0, 0, 0, 0.3);
+}
+.title {
+  color: black;
+  font-weight: bold;
+}
+
+.num-terms {
+  padding-top: 0.5rem;
+  font-size: 1.4rem;
+}
+
+.account {
+  position: absolute;
+  bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: blueviolet;
+}
+
+.user-name {
+  padding-left: 1rem;
+  font-size: 1.2rem;
+}

@@ -1,0 +1,64 @@
+.header,
+.container {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.header {
+  padding: 10px 15px;
+  background-color: white;
+  flex-direction: row;
+  border-bottom: 2px solid #f6f7fb;
+}
+.container {
+  margin-bottom: 1rem;
+  padding: 40px 15px;
+}
+
+.trash-icon {
+  color: #555;
+  font-size: 1.8rem;
+}
+
+.trash-icon :hover {
+  color: rgb(255, 196, 0);
+}
+
+.term,
+.definition {
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+[placeholder]:empty::before {
+  content: attr(placeholder);
+  color: #555;
+}
+
+[placeholder]:empty:focus::before {
+  content: '';
+}
+
+.term-input {
+  background: none;
+  width: 100%;
+  font-size: 1.6rem;
+  border: none;
+  border-bottom: 1px solid #333;
+  padding: 0;
+}
+
+.term-input:focus {
+  border-bottom: 3px solid rgb(255, 196, 0);
+  outline: none;
+}
+
+.term-lable {
+  text-transform: uppercase;
+  font-size: 1.2rem;
+}

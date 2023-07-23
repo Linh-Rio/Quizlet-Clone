@@ -8,6 +8,8 @@
   border-bottom: 0.0625rem solid #edeff4;
   background-color: aliceblue;
   padding: 0 16px;
+  position: fixed;
+  top: 0;
 }
 .navigation {
   height: 100%;
@@ -26,7 +28,10 @@
   font-weight: 600;
   cursor: pointer;
 }
-
+.homepage:hover,
+.library:hover {
+  border-bottom: 3px solid yellow;
+}
 .logo {
   width: 64px;
   height: 100%;

@@ -3,12 +3,12 @@ import userService from "../services/userService";
 // signup controller
 let handleSignUp = async (req, res) => {
   // 6 attributes (firstName, lastName, userName, email, password, birthday)
-  console.log(checkAllValues(req.body));
-  if (checkAllValues(req.body)) {
+  if (checkAllValues(req.body, ["avatar"])) {
     return res.status(500).json({
       errCode: 1,
       message: "Missing inputs parameter!",
       user: {},
+      token: "",
     });
   }
   let userData = await userService.hanldeUserSignUp(req.body);
@@ -16,9 +16,11 @@ let handleSignUp = async (req, res) => {
     errCode: userData.errCode,
     message: userData.errMessage,
     user: userData.user ? userData.user : {},
+    token: userData.token ? userData.token : "",
   });
 };
-let checkAllValues = (obj) => {
+let checkAllValues = (obj, nonecheck = []) => {
+  delete obj[nonecheck];
   let values = Object.values(obj);
   return !values.every(
     (value) => value !== undefined && value !== null && value !== ""
@@ -35,6 +37,7 @@ let handleLogin = async (req, res) => {
       errCode: 1,
       message: "Missing inputs parameter!",
       user: {},
+      token: "",
     });
   }
 
@@ -48,6 +51,7 @@ let handleLogin = async (req, res) => {
     errCode: userData.errCode,
     message: userData.errMessage,
     user: userData.user ? userData.user : {},
+    token: userData.token ? userData.token : "",
   });
 };
 

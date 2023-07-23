@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      FlashCard.belongsTo(models.Vocabset, { foreignKey: "vocabset_id" });
+      FlashCard.belongsTo(models.VocabSet, { foreignKey: "vocabset_id" });
     }
   }
   FlashCard.init(

@@ -14,6 +14,8 @@ import styles from './HeaderStyle.module.scss';
 import SearchBar from '../SearchBar/SearchBar';
 import { useState } from 'react';
 
+import { useSelector } from 'react-redux';
+
 const cx = classnames.bind(styles);
 
 const avartarMenu = [
@@ -26,7 +28,9 @@ const avartarMenu = [
 ];
 
 const Header = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  const token = useSelector((state) => state.user.user.token);
+  const [isLogin, setIsLogin] = useState(token ? true : false);
+
   return (
     <div className={cx('container')}>
       <div className={cx('navigation')}>
@@ -42,9 +46,9 @@ const Header = () => {
         <SearchBar />
       </div>
       <div className={cx('icon-container')}>
-        <div className={cx('create')}>
+        <Link to="/create-set" className={cx('create')}>
           <FontAwesomeIcon icon={faCirclePlus} />
-        </div>
+        </Link>
         {isLogin ? (
           <div className={cx('login-container')}>
             <div className={cx('notice')}>

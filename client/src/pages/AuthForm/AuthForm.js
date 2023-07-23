@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames/bind';
+import { useDispatch } from 'react-redux';
 
 import styles from './AuthFormStyles.module.scss';
 import {
@@ -8,6 +9,7 @@ import {
   handleSignup,
 } from '../../services/userService';
 import InputPass from '../../components/InputPass';
+import { setToken } from '../../redux/slices/userSlice';
 
 const cx = classNames.bind(styles);
 
@@ -24,6 +26,7 @@ const AuthForm = () => {
   const [errMessage, setErrMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -64,8 +67,8 @@ const AuthForm = () => {
         }
         if (data && data.errCode === 0) {
           //todo after login
+          dispatch(setToken(data.token));
           navigate('/');
-          console.log(data.message);
         }
       } catch (error) {
         console.log(error);
@@ -90,8 +93,8 @@ const AuthForm = () => {
       }
       if (data && data.errCode === 0) {
         //todo after login
+        dispatch(setToken(data.token));
         navigate('/');
-        console.log(data.message);
       }
     } catch (error) {
       console.log(error);

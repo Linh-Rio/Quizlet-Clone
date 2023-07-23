@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Learn.belongsTo(models.Vocabset, { foreignKey: "vocabset_id" });
+      Learn.belongsTo(models.VocabSet, { foreignKey: "vocabset_id" });
       Learn.belongsTo(models.User, { foreignKey: "user_id" });
     }
   }
