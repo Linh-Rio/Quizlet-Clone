@@ -61,6 +61,7 @@ const Header = () => {
               offset={[0, 5]}
               interactive
               delay={[0, 500]}
+              appendTo={document.body}
               render={(attrs) => (
                 <div
                   className={cx('avatar-container')}

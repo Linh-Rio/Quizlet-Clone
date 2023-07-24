@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import styles from './CreateSetStyle.module.scss';
 import Header from '../../components/Header';
 import AddTerm from '../../components/AddTerm/AddTerm';
+import { handleCreateSet } from '../../services/studySetService';
 
 const cx = classNames.bind(styles);
 
@@ -34,6 +35,7 @@ const CreateSet = () => {
   const [studySet, setStudySet] = useState({
     title: '',
     description: '',
+    user_id: 1,
   });
 
   const setTitle = (title) => {
@@ -103,13 +105,30 @@ const CreateSet = () => {
     ]);
   };
 
+  const handleOnCreateset = async () => {
+    let termTransfer = terms.filter((term) => {
+      return term.term.length > 0 && term.definition.length > 0;
+    });
+    let data = await handleCreateSet(
+      JSON.stringify(studySet),
+      JSON.stringify(termTransfer),
+    );
+    console.log(data);
+    console.log(data.message);
+  };
+
   return (
     <>
       <Header />
       <div className={cx('container')}>
         <div className={cx('header')}>
           <span>Create a new study set</span>
-          <button className={cx('Button')}>Create</button>
+          <button
+            className={cx('Button')}
+            onClick={handleOnCreateset}
+          >
+            Create
+          </button>
         </div>
 
         <div className={cx('study-set-container')}>

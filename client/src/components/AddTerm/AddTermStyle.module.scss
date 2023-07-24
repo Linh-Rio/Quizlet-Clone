@@ -33,24 +33,17 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-}
-
-[placeholder]:empty::before {
-  content: attr(placeholder);
-  color: #555;
-}
-
-[placeholder]:empty:focus::before {
-  content: '';
+  margin-top: 1rem;
 }
 
 .term-input {
   background: none;
   width: 100%;
   font-size: 1.6rem;
+  font-family: 'Montserrat', sans-serif;
   border: none;
   border-bottom: 1px solid #333;
-  padding: 0;
+  padding: 1rem 0;
 }
 
 .term-input:focus {
