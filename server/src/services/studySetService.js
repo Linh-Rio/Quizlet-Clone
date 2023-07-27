@@ -58,7 +58,7 @@ let handleCreateSet = async (data) => {
   });
 };
 
-let checkStudySet = (user_id, title) => {
+let checkStudySet = async (user_id, title) => {
   return new Promise(async (resolve, reject) => {
     try {
       let vocabSets = await db.VocabSet.findAll({
@@ -76,4 +76,31 @@ let checkStudySet = (user_id, title) => {
   });
 };
 
-module.exports = { handleCreateSet };
+const handleGetSet = () => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const result = {};
+      const vocabSets = await db.VocabSet.findAll({
+        attributes: ["id", "title", "description"],
+        include: [
+          {
+            model: db.User,
+            attributes: ["userName", "avatar"],
+          },
+          {
+            model: db.FlashCard,
+            attributes: ["front", "back"],
+          },
+        ],
+      });
+      result.errMessage = "ok";
+      result.errCode = 0;
+      result.vocabSets = vocabSets;
+      resolve(result);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+module.exports = { handleCreateSet, handleGetSet };

@@ -18,4 +18,12 @@ httpRequest.interceptors.response.use((response) => {
   return data;
 });
 
+httpRequest.interceptors.request.use((req) => {
+  if (localStorage.getItem('profile')) {
+    const profile = JSON.parse(localStorage.getItem('profile'));
+    req.headers.Authorization = `Bearer ${profile.token}`;
+  }
+  return req;
+});
+
 export default httpRequest;

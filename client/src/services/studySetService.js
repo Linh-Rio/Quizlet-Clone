@@ -7,4 +7,8 @@ const handleCreateSet = async (studySet, terms) => {
   });
 };
 
-export { handleCreateSet };
+const handleGetSet = async () => {
+  return await httpRequest.get('/api/study-set');
+};
+
+export { handleCreateSet, handleGetSet };

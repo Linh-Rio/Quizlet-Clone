@@ -31,4 +31,17 @@ const handleCreateSet = async (req, res) => {
   }
 };
 
-module.exports = { handleCreateSet };
+const handleGetSet = async (req, res) => {
+  try {
+    const studySet = await studySetservice.handleGetSet();
+    return res.status(200).json({
+      errCode: studySet.errCode,
+      message: studySet.errMessage,
+      vocabSets: studySet.vocabSets,
+    });
+  } catch (error) {
+    return res.status(404).json({ message: error.message });
+  }
+};
+
+module.exports = { handleCreateSet, handleGetSet };

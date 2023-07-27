@@ -28,8 +28,8 @@ const avartarMenu = [
 ];
 
 const Header = () => {
-  const token = useSelector((state) => state.user.user.token);
-  const [isLogin, setIsLogin] = useState(token ? true : false);
+  const user = useSelector((state) => state.user.user);
+  const [isLogin, setIsLogin] = useState(user ? true : false);
 
   return (
     <div className={cx('container')}>

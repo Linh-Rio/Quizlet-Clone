@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import classNames from 'classnames/bind';
 import { useDispatch } from 'react-redux';
+import classNames from 'classnames/bind';
 
 import styles from './AuthFormStyles.module.scss';
 import {
@@ -9,7 +9,7 @@ import {
   handleSignup,
 } from '../../services/userService';
 import InputPass from '../../components/InputPass';
-import { setToken } from '../../redux/slices/userSlice';
+import { loginSuccess } from '../../redux/slices/user';
 
 const cx = classNames.bind(styles);
 
@@ -66,8 +66,8 @@ const AuthForm = () => {
           setErrMessage(data.message);
         }
         if (data && data.errCode === 0) {
-          //todo after login
-          dispatch(setToken(data.token));
+          const payload = { user: data.user, token: data.token };
+          dispatch(loginSuccess(payload));
           navigate('/');
         }
       } catch (error) {
@@ -93,7 +93,8 @@ const AuthForm = () => {
       }
       if (data && data.errCode === 0) {
         //todo after login
-        dispatch(setToken(data.token));
+        const payload = { user: data.user, token: data.token };
+        dispatch(loginSuccess(payload));
         navigate('/');
       }
     } catch (error) {

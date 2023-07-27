@@ -3,9 +3,7 @@ import {
   Routes,
   Route,
 } from 'react-router-dom';
-import Home from './pages/Home';
-import AuthForm from './pages/AuthForm';
-import CreateSet from './pages/CreateSet/CreateSet';
+import { Home, AuthForm, CreateSet, ViewSet } from './pages';
 
 function App() {
   return (
@@ -14,6 +12,7 @@ function App() {
         <Route path="/" exact element={<Home />} />
         <Route path="/authform" element={<AuthForm />} />
         <Route path="/create-set" element={<CreateSet />} />
+        <Route path="/:setId/:setTitle" element={<ViewSet />} />
       </Routes>
     </Router>
   );
