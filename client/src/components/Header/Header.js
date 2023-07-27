@@ -1,5 +1,5 @@
 import classnames from 'classnames/bind';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowRightFromBracket,
@@ -12,9 +12,11 @@ import Tippy from '@tippyjs/react/headless';
 
 import styles from './HeaderStyle.module.scss';
 import SearchBar from '../SearchBar/SearchBar';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import jwtDecode from 'jwt-decode';
+import { loginSuccess, logoutSuccess } from '../../redux/slices/user';
 
 const cx = classnames.bind(styles);
 
@@ -28,18 +30,61 @@ const avartarMenu = [
 ];
 
 const Header = () => {
-  const user = useSelector((state) => state.user.user);
-  const [isLogin, setIsLogin] = useState(user ? true : false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem('profile')),
+  );
+
+  useEffect(() => {
+    // Check if the user's state exists in localStorage
+    const oldUser = JSON.parse(localStorage.getItem('profile'));
+
+    // Check if the user's state has changed
+    if (JSON.stringify(oldUser) !== JSON.stringify(user)) {
+      setUser(oldUser);
+
+      // Dispatch the loginSuccess action only if the user's state has changed
+      const payload = {
+        id: oldUser?.id,
+        firstName: oldUser.firstName,
+        lastName: oldUser.lastName,
+        userName: oldUser.userName,
+        email: oldUser.email,
+        birthday: oldUser.birthday,
+        avatar: oldUser.avatar,
+        token: oldUser.token,
+      };
+      dispatch(loginSuccess(payload));
+    }
+
+    // Check if the token is expired and perform logout if needed
+    const token = oldUser?.token;
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      if (decodedToken.exp * 1000 < new Date().getTime()) {
+        logout();
+      }
+    }
+  }, [location]);
+
+  const logout = () => {
+    dispatch(logoutSuccess());
+    navigate('/authform'); // redirect to login page
+    setUser(null);
+  };
 
   return (
     <div className={cx('container')}>
       <div className={cx('navigation')}>
-        <div className={cx('logo')}></div>
+        <Link to="/" className={cx('logo')}></Link>
         <Link to="/" className={cx('homepage')}>
           Home
         </Link>
         <div className={cx('library')}>
-          {isLogin ? 'Your library' : 'Subject areas'}
+          {user ? 'Your library' : 'Subject areas'}
         </div>
       </div>
       <div className={cx('search-bar')}>
@@ -49,7 +94,7 @@ const Header = () => {
         <Link to="/create-set" className={cx('create')}>
           <FontAwesomeIcon icon={faCirclePlus} />
         </Link>
-        {isLogin ? (
+        {user ? (
           <div className={cx('login-container')}>
             <div className={cx('notice')}>
               <FontAwesomeIcon icon={faBell} />
@@ -85,12 +130,21 @@ const Header = () => {
                         <span className={cx('icon')}>
                           {item.icon}
                         </span>
-                        <Link
-                          to={`${item.name}`}
-                          className={cx('name')}
-                        >
-                          {item.name}
-                        </Link>
+                        {item.name === 'Logout' ? (
+                          <div
+                            className={cx('name')}
+                            onClick={logout}
+                          >
+                            {item.name}
+                          </div>
+                        ) : (
+                          <Link
+                            to={`${item.name}`}
+                            className={cx('name')}
+                          >
+                            {item.name}
+                          </Link>
+                        )}
                       </button>
                     );
                   })}

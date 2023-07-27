@@ -66,7 +66,16 @@ const AuthForm = () => {
           setErrMessage(data.message);
         }
         if (data && data.errCode === 0) {
-          const payload = { user: data.user, token: data.token };
+          const payload = {
+            id: data.user.id,
+            firstName: data.user.firstName,
+            lastName: data.user.lastName,
+            userName: data.user.userName,
+            email: data.user.email,
+            birthday: data.user.birthday,
+            avatar: data.user.avatar,
+            token: data.token,
+          };
           dispatch(loginSuccess(payload));
           navigate('/');
         }
@@ -93,7 +102,17 @@ const AuthForm = () => {
       }
       if (data && data.errCode === 0) {
         //todo after login
-        const payload = { user: data.user, token: data.token };
+        console.log(data.user);
+        const payload = {
+          id: data.user.id,
+          firstName: data.user.firstName,
+          lastName: data.user.lastName,
+          userName: data.user.userName,
+          email: data.user.email,
+          birthday: data.user.birthday,
+          avatar: data.user.avatar,
+          token: data.token,
+        };
         dispatch(loginSuccess(payload));
         navigate('/');
       }

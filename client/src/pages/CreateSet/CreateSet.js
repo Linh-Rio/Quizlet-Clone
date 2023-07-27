@@ -2,13 +2,17 @@ import classNames from 'classnames/bind';
 import { useState, useMemo } from 'react';
 
 import styles from './CreateSetStyle.module.scss';
-import Header from '../../components/Header';
 import AddTerm from '../../components/AddTerm/AddTerm';
 import { handleCreateSet } from '../../services/studySetService';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 const CreateSet = () => {
+  const user = useSelector((state) => state.user);
+  const navigate = useNavigate();
+
   const [terms, setTerms] = useState([
     {
       term: '',
@@ -35,7 +39,7 @@ const CreateSet = () => {
   const [studySet, setStudySet] = useState({
     title: '',
     description: '',
-    user_id: 1,
+    user_id: user?.id,
   });
 
   const setTitle = (title) => {
@@ -113,45 +117,40 @@ const CreateSet = () => {
       JSON.stringify(studySet),
       JSON.stringify(termTransfer),
     );
+    navigate('/');
     console.log(data);
     console.log(data.message);
   };
 
   return (
-    <>
-      <Header />
-      <div className={cx('container')}>
-        <div className={cx('header')}>
-          <span>Create a new study set</span>
-          <button
-            className={cx('Button')}
-            onClick={handleOnCreateset}
-          >
-            Create
-          </button>
-        </div>
+    <div className={cx('container')}>
+      <div className={cx('header')}>
+        <span>Create a new study set</span>
+        <button className={cx('Button')} onClick={handleOnCreateset}>
+          Create
+        </button>
+      </div>
 
-        <div className={cx('study-set-container')}>
-          <AddTerm
-            term={studySet.title}
-            definition={studySet.description}
-            setTerm={setTitle}
-            setDefinition={setDescription}
-            placeholder1='Enter a title, like "Biology - Chapter 22 Evolution"'
-            label1="Title"
-            placeholder2="Add a description"
-            label2="Description"
-            flexDirection="column"
-            backgroundColor="none"
-            displayHeader="none"
-          />
-          {generateTerm}
-          <div className={cx('add-card')}>
-            <span onClick={handleAddCard}>+ ADD CARD</span>
-          </div>
+      <div className={cx('study-set-container')}>
+        <AddTerm
+          term={studySet.title}
+          definition={studySet.description}
+          setTerm={setTitle}
+          setDefinition={setDescription}
+          placeholder1='Enter a title, like "Biology - Chapter 22 Evolution"'
+          label1="Title"
+          placeholder2="Add a description"
+          label2="Description"
+          flexDirection="column"
+          backgroundColor="none"
+          displayHeader="none"
+        />
+        {generateTerm}
+        <div className={cx('add-card')}>
+          <span onClick={handleAddCard}>+ ADD CARD</span>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

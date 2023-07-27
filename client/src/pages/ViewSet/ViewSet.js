@@ -2,7 +2,6 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import classNames from 'classnames/bind';
 
-import Header from '../../components/Header';
 import Term from '../../components/Term/Term';
 import styles from './ViewSetStyle.module.scss';
 
@@ -16,7 +15,6 @@ const ViewSet = () => {
   });
   return (
     <div className={cx('container')}>
-      <Header />
       <div>{Studyset[0].title}</div>
       {Studyset[0].FlashCards.map((card, index) => {
         return (
