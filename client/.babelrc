@@ -6,7 +6,8 @@
         "alias": {
           "~": "./src"
         }
-      }
+      },
+      "@babel/plugin-proposal-private-property-in-object"
     ]
   ]
 }

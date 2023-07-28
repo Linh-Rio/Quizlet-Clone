@@ -4,6 +4,7 @@ import classNames from 'classnames/bind';
 
 import Term from '../../components/Term/Term';
 import styles from './ViewSetStyle.module.scss';
+import Header from '../../components/Header';
 
 const cx = classNames.bind(styles);
 
@@ -15,8 +16,9 @@ const ViewSet = () => {
   });
   return (
     <div className={cx('container')}>
-      <div>{Studyset[0].title}</div>
-      {Studyset[0].FlashCards.map((card, index) => {
+      <Header />
+      <div>{Studyset[0]?.title}</div>
+      {Studyset[0]?.FlashCards?.map((card, index) => {
         return (
           <Term
             term={card.front}

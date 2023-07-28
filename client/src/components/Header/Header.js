@@ -39,35 +39,28 @@ const Header = () => {
   );
 
   useEffect(() => {
-    // Check if the user's state exists in localStorage
-    const oldUser = JSON.parse(localStorage.getItem('profile'));
+    const token = user?.token;
 
-    // Check if the user's state has changed
-    if (JSON.stringify(oldUser) !== JSON.stringify(user)) {
-      setUser(oldUser);
-
-      // Dispatch the loginSuccess action only if the user's state has changed
-      const payload = {
-        id: oldUser?.id,
-        firstName: oldUser.firstName,
-        lastName: oldUser.lastName,
-        userName: oldUser.userName,
-        email: oldUser.email,
-        birthday: oldUser.birthday,
-        avatar: oldUser.avatar,
-        token: oldUser.token,
-      };
-      dispatch(loginSuccess(payload));
-    }
-
-    // Check if the token is expired and perform logout if needed
-    const token = oldUser?.token;
     if (token) {
       const decodedToken = jwtDecode(token);
-      if (decodedToken.exp * 1000 < new Date().getTime()) {
-        logout();
-      }
+      if (decodedToken.exp * 1000 < new Date().getTime()) logout();
     }
+
+    const oldUser = JSON.parse(localStorage.getItem('profile'));
+    setUser(oldUser);
+
+    const payload = {
+      id: oldUser?.id,
+      firstName: oldUser.firstName,
+      lastName: oldUser.lastName,
+      userName: oldUser.userName,
+      email: oldUser.email,
+      birthday: oldUser.birthday,
+      avatar: oldUser.avatar,
+      token: oldUser.token,
+    };
+    dispatch(loginSuccess(payload));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
   const logout = () => {
@@ -139,7 +132,7 @@ const Header = () => {
                           </div>
                         ) : (
                           <Link
-                            to={`${item.name}`}
+                            to={`/${item.name.toLowerCase()}`}
                             className={cx('name')}
                           >
                             {item.name}

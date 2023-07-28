@@ -1,16 +1,18 @@
 import classNames from 'classnames/bind';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import styles from './CreateSetStyle.module.scss';
 import AddTerm from '../../components/AddTerm/AddTerm';
-import { handleCreateSet } from '../../services/studySetService';
-import { useSelector } from 'react-redux';
+import { createStudySet } from '../../redux/slices/studySet';
+import Header from '../../components/Header';
 import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 const CreateSet = () => {
   const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [terms, setTerms] = useState([
@@ -42,6 +44,16 @@ const CreateSet = () => {
     user_id: user?.id,
   });
 
+  useEffect(() => {
+    setUserId(user?.id);
+  }, [user?.id]);
+
+  const setUserId = (userId) => {
+    setStudySet((prevState) => ({
+      ...prevState,
+      user_id: userId,
+    }));
+  };
   const setTitle = (title) => {
     setStudySet((prevState) => ({
       ...prevState,
@@ -101,11 +113,11 @@ const CreateSet = () => {
 
   const handleAddCard = () => {
     setTerms([
+      ...terms,
       {
         term: '',
         definition: '',
       },
-      ...terms,
     ]);
   };
 
@@ -113,17 +125,17 @@ const CreateSet = () => {
     let termTransfer = terms.filter((term) => {
       return term.term.length > 0 && term.definition.length > 0;
     });
-    let data = await handleCreateSet(
-      JSON.stringify(studySet),
-      JSON.stringify(termTransfer),
-    );
+    let payload = {
+      studySet: JSON.stringify(studySet),
+      terms: JSON.stringify(termTransfer),
+    };
+    dispatch(createStudySet(payload));
     navigate('/');
-    console.log(data);
-    console.log(data.message);
   };
 
   return (
     <div className={cx('container')}>
+      <Header />
       <div className={cx('header')}>
         <span>Create a new study set</span>
         <button className={cx('Button')} onClick={handleOnCreateset}>

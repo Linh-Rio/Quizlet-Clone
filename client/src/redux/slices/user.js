@@ -29,16 +29,14 @@ const userSlice = createSlice({
     },
     logoutSuccess: (state, action) => {
       localStorage.clear();
-      state = {
-        id: null,
-        email: '',
-        userName: '',
-        firstName: '',
-        lastName: '',
-        birthday: '',
-        avatar: null,
-        token: '',
-      };
+      state.id = null;
+      state.email = '';
+      state.userName = '';
+      state.firstName = '';
+      state.lastName = '';
+      state.birthday = '';
+      state.avatar = null;
+      state.token = '';
     },
   },
 });

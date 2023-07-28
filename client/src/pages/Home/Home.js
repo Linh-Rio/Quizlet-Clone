@@ -1,17 +1,13 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-
 import Body from '../../components/Body/Body';
-import { getStudySet } from '../../redux/slices/studySet';
+import Header from '../../components/Header';
 
 const Home = () => {
-  const dispatch = useDispatch();
-  const studySets = useSelector((state) => state.studySet.listSets);
-  useEffect(() => {
-    dispatch(getStudySet());
-  }, [dispatch]);
-
-  return <Body listStudySet={studySets} />;
+  return (
+    <>
+      <Header />
+      <Body />
+    </>
+  );
 };
 
 export default Home;

@@ -21,29 +21,32 @@ let handleCreateSet = async (data) => {
           })
         ).get({ raw: true });
 
-        let keysToDelete = ["updatedAt", "createdAt"];
-        for (let key of keysToDelete) {
-          delete vocabSet[key];
-        }
-        result.vocabset = vocabSet;
-        let flashCard = {};
-        let listFlashCard = await Promise.all(
+        await Promise.all(
           listTerms.map(async (term) => {
-            flashCard = (
-              await db.FlashCard.create({
-                front: term.term,
-                back: term.definition,
-                image: term.image ? term.image : null,
-                vocabset_id: vocabSet.id,
-              })
-            ).get({ raw: true });
-            for (let key of keysToDelete) {
-              delete flashCard[key];
-            }
-            return flashCard;
+            await db.FlashCard.create({
+              front: term.term,
+              back: term.definition,
+              image: term.image ? term.image : null,
+              vocabset_id: vocabSet.id,
+            });
           })
         );
-        result.listFlashCard = listFlashCard;
+
+        const newVocabset = await db.VocabSet.findOne({
+          attributes: ["id", "title", "description"],
+          include: [
+            {
+              model: db.User,
+              attributes: ["userName", "avatar"],
+            },
+            {
+              model: db.FlashCard,
+              attributes: ["front", "back"],
+            },
+          ],
+          where: { id: vocabSet.id },
+        });
+        result.vocabset = newVocabset;
         result.errCode = 0;
         result.errMessage = "ok";
       } else {
@@ -92,6 +95,7 @@ const handleGetSet = () => {
             attributes: ["front", "back"],
           },
         ],
+        order: [["createdAt", "DESC"]],
       });
       result.errMessage = "ok";
       result.errCode = 0;

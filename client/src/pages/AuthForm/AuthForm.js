@@ -130,7 +130,7 @@ const AuthForm = () => {
     <div className={cx('Auth-container')}>
       <div className={cx('container', activePanel)} id="container">
         <div className={cx('form-container', 'sign-up-container')}>
-          <form className={cx('form')}>
+          <div className={cx('form')}>
             <h1 className={cx('h1')}>Create Account</h1>
             {/* <div className={cx('social-container')}>
               <a className={cx('social')}>
@@ -220,11 +220,11 @@ const AuthForm = () => {
             >
               Sign Up
             </button>
-          </form>
+          </div>
         </div>
 
         <div className={cx('form-container', 'sign-in-container')}>
-          <form action="#" className={cx('form')}>
+          <div className={cx('form')}>
             <h1 className={cx('h1')}>Sign in</h1>
             {/* <div className={cx('social-container')}>
               <a href="#" className={cx('social')}>
@@ -269,7 +269,7 @@ const AuthForm = () => {
             <a className={cx('a')} href="/reset-password">
               Forgot your password?
             </a>
-          </form>
+          </div>
         </div>
 
         <div className={cx('overlay-container')}>
