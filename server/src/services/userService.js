@@ -39,7 +39,7 @@ let hanldeUserSignUp = async (data) => {
           userData.errMessage = "ok";
           userData.token = token;
           // remove id, pass, time before assign for userData
-          let keysToDelete = ["id", "password", "updatedAt", "createdAt"];
+          let keysToDelete = ["password", "updatedAt", "createdAt"];
           for (let key of keysToDelete) {
             delete user[key];
           }

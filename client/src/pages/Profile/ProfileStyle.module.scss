@@ -1,0 +1,52 @@
+.container {
+  width: 100%;
+  margin-top: 64px;
+}
+
+.user-infor {
+  width: fit-content;
+  padding: 3rem 5rem;
+  display: grid;
+  grid-template-areas:
+    'avatar user-name'
+    'avatar full-name'
+    'upload other';
+  gap: 0 2rem;
+  align-items: self-end;
+}
+
+.avatar {
+  grid-area: avatar;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background-size: cover;
+}
+
+.upload {
+  grid-area: upload;
+  font-size: 1.4rem;
+  padding-top: 0.5rem;
+  color: #ffcd1f;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.upload:hover {
+  color: #ffdc62;
+}
+
+.user-name {
+  grid-area: user-name;
+  color: #2e3866;
+  font-size: 2.6rem;
+  font-weight: bold;
+  line-height: 2rem;
+}
+
+.full-name {
+  grid-area: full-name;
+  font-size: 1.6rem;
+  color: #939bb4;
+}

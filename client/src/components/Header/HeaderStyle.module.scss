@@ -6,7 +6,7 @@
   justify-content: space-around;
   align-items: center;
   border-bottom: 0.0625rem solid #edeff4;
-  background-color: aliceblue;
+  background-color: #fff;
   padding: 0 16px;
   position: fixed;
   top: 0;
@@ -87,10 +87,6 @@
   box-shadow: 0 0.25rem 1rem 0 #2e385614;
 }
 
-.avatar-container :hover {
-  background-color: rgb(232, 241, 250);
-}
-
 .profile-tag {
   display: grid;
   grid-template-areas:
@@ -100,12 +96,12 @@
   justify-content: center;
   border-bottom: 1px solid #bebfc4;
 }
-.profile-tag:hover,
-.profile-avatar:hover,
-.username:hover,
-.profile-email:hover {
-  background-color: aliceblue;
-}
+// .profile-tag:hover,
+// .profile-avatar:hover,
+// .username:hover,
+// .profile-email:hover {
+//   background-color: aliceblue;
+// }
 
 .profile-avatar {
   grid-area: profile-avatar;
@@ -140,11 +136,17 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: rgb(232, 241, 250);
 }
 
 .icon {
   font-size: 2rem;
   padding-right: 18px;
+  margin-left: 16px;
 }
 
 .name {

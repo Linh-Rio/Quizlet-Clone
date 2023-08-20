@@ -11,4 +11,25 @@ const handleGetSet = async () => {
   return await httpRequest.get('/api/study-set');
 };
 
-export { handleCreateSet, handleGetSet };
+const handleDeleteSet = async (id) => {
+  return await httpRequest.delete('/api/delete-set', {
+    data: {
+      id,
+    },
+  });
+};
+
+const handleGetSetDetail = async (id) => {
+  return await httpRequest.get('/api/set-detail', {
+    params: {
+      id,
+    },
+  });
+};
+
+export {
+  handleCreateSet,
+  handleGetSet,
+  handleDeleteSet,
+  handleGetSetDetail,
+};

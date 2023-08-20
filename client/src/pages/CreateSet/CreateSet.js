@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import styles from './CreateSetStyle.module.scss';
 import AddTerm from '../../components/AddTerm/AddTerm';
 import { createStudySet } from '../../redux/slices/studySet';
-import Header from '../../components/Header';
+import Header from '../../components/Header/Header';
 import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
@@ -46,7 +46,7 @@ const CreateSet = () => {
 
   useEffect(() => {
     setUserId(user?.id);
-  }, [user?.id]);
+  }, [user]);
 
   const setUserId = (userId) => {
     setStudySet((prevState) => ({
@@ -129,6 +129,7 @@ const CreateSet = () => {
       studySet: JSON.stringify(studySet),
       terms: JSON.stringify(termTransfer),
     };
+    console.log(payload);
     dispatch(createStudySet(payload));
     navigate('/');
   };

@@ -23,8 +23,8 @@ const Body = () => {
           <Link to={`${set.id}/${set.title}`} key={index}>
             <StudySet
               title={set.title}
-              userName={set.User.userName}
-              listTerms={set.FlashCards}
+              userName={set.userName}
+              totalTerm={set.totalTerm}
             />
           </Link>
         );

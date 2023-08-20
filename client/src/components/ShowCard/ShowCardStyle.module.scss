@@ -1,0 +1,52 @@
+// show card
+.show-card {
+  width: 80%;
+  height: 735px;
+  margin-top: 15px;
+}
+
+.term-container {
+  width: 100%;
+  height: 85%;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 0.25rem 1rem 0 #2e385614;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.term-text {
+  max-height: 500px;
+  margin: 1.4rem 2.6rem;
+  font-size: 3.6rem;
+  color: #586380;
+  overflow-y: scroll;
+  white-space: break-spaces;
+}
+
+.footer-term {
+  width: 100%;
+  height: 15%;
+  background-color: rgb(246, 247, 251);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.left-arrow,
+.right-arrow {
+  height: 52px;
+  width: 52px;
+  color: #586380;
+  border: 1px solid #e1e4ed;
+  background-color: #fff;
+  font-size: 1.8rem;
+  border-radius: 50%;
+}
+
+.counter {
+  color: #586380;
+  font-size: 1.8rem;
+  padding: 0 1.6rem;
+}

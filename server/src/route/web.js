@@ -10,6 +10,9 @@ let initWebRoutes = (app) => {
   router.post("/api/create-set", studySetController.handleCreateSet);
 
   router.get("/api/study-set", studySetController.handleGetSet);
+  router.get("/api/set-detail/", studySetController.handleGetSetDetail);
+
+  router.delete("/api/delete-set", studySetController.handleDeleteSet);
 
   return app.use("/", router);
 };

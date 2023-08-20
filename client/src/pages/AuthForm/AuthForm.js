@@ -76,6 +76,7 @@ const AuthForm = () => {
             avatar: data.user.avatar,
             token: data.token,
           };
+          console.log(payload);
           dispatch(loginSuccess(payload));
           navigate('/');
         }
@@ -102,7 +103,6 @@ const AuthForm = () => {
       }
       if (data && data.errCode === 0) {
         //todo after login
-        console.log(data.user);
         const payload = {
           id: data.user.id,
           firstName: data.user.firstName,

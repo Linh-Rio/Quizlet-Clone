@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import {
   handleGetSet,
   handleCreateSet,
+  handleDeleteSet,
 } from '../../services/studySetService';
 
 export const getStudySet = createAsyncThunk(
@@ -28,6 +29,18 @@ export const createStudySet = createAsyncThunk(
   },
 );
 
+export const deleteStudySet = createAsyncThunk(
+  'studySet/deleteStudySet',
+  async ({ id }) => {
+    try {
+      const response = await handleDeleteSet(id);
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+);
+
 const studySetSlice = createSlice({
   name: 'studySet',
   initialState: {
@@ -41,6 +54,7 @@ const studySetSlice = createSlice({
     builder.addCase(createStudySet.fulfilled, (state, action) => {
       //   state.listSets.unshift(action.payload);
       // });
+      console.log(action.payload);
       const newStudySet = action.payload;
       const existingIndex = state.listSets.findIndex(
         (studySet) => studySet.id === newStudySet.id, // Assuming the study set has an 'id' field as a unique identifier
@@ -51,6 +65,15 @@ const studySetSlice = createSlice({
         // If the study set already exists, update it instead of adding it again
         state.listSets[existingIndex] = newStudySet;
       }
+    });
+    builder.addCase(deleteStudySet.fulfilled, (state, action) => {
+      const idForDelete = action.meta.arg.id;
+      return {
+        ...state,
+        listSets: state.listSets.filter(
+          (studySet) => studySet.id !== idForDelete,
+        ),
+      };
     });
   },
 });

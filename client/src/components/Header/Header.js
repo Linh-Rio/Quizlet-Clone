@@ -17,6 +17,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import jwtDecode from 'jwt-decode';
 import { loginSuccess, logoutSuccess } from '../../redux/slices/user';
+import noImage from '../../assets/images/noImage.jpg';
 
 const cx = classnames.bind(styles);
 
@@ -48,18 +49,22 @@ const Header = () => {
 
     const oldUser = JSON.parse(localStorage.getItem('profile'));
     setUser(oldUser);
+    if (oldUser) {
+      const payload = {
+        id: oldUser.id,
+        firstName: oldUser.firstName,
+        lastName: oldUser.lastName,
+        userName: oldUser.userName,
+        email: oldUser.email,
+        birthday: oldUser.birthday,
+        avatar: oldUser.avatar,
+        token: oldUser.token,
+      };
 
-    const payload = {
-      id: oldUser?.id,
-      firstName: oldUser.firstName,
-      lastName: oldUser.lastName,
-      userName: oldUser.userName,
-      email: oldUser.email,
-      birthday: oldUser.birthday,
-      avatar: oldUser.avatar,
-      token: oldUser.token,
-    };
-    dispatch(loginSuccess(payload));
+      dispatch(loginSuccess(payload));
+    } else {
+      logout();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
@@ -108,13 +113,15 @@ const Header = () => {
                 >
                   <div className={cx('profile-tag')}>
                     <img
-                      src={require('../../assets/images/avartar.jpg')}
+                      src={noImage}
                       alt="avatar"
                       className={cx('profile-avatar')}
                     />
-                    <div className={cx('username')}>VanLinh256</div>
+                    <div className={cx('username')}>
+                      {user.userName}
+                    </div>
                     <div className={cx('profile-email')}>
-                      vanlinhnguyenvp123...
+                      {user.email}
                     </div>
                   </div>
                   {avartarMenu.map((item, index) => {
@@ -146,7 +153,7 @@ const Header = () => {
             >
               <img
                 className={cx('avatar')}
-                src={require('../../assets/images/avartar.jpg')}
+                src={noImage}
                 alt="avartar"
               />
             </Tippy>
