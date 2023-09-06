@@ -13,18 +13,18 @@ import {
   faNoteSticky,
 } from '@fortawesome/free-regular-svg-icons';
 import {
-  faArrowLeft,
-  faArrowRight,
   faCircleNodes,
   faGraduationCap,
   faPen,
   faTrash,
 } from '@fortawesome/free-solid-svg-icons';
-import Button from '../../components/Button/Button';
+import FeatureButton from '../../components/FeatureButton/FeatureButton';
 
-import { deleteStudySet } from '../../redux/slices/studySet';
+import {
+  deleteStudySet,
+  getSetDetail,
+} from '../../redux/slices/studySet';
 import { useEffect, useState } from 'react';
-import { handleGetSetDetail } from '../../services/studySetService';
 import ShowCard from '../../components/ShowCard/ShowCard';
 
 const cx = classNames.bind(styles);
@@ -33,7 +33,6 @@ const ViewSet = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [studySet, setStudySet] = useState({});
   const [listFlashCard, setListFlashCard] = useState([]);
   const [currentTerm, setCurrentTerm] = useState(0);
   const [isFront, setIsFront] = useState(true);
@@ -58,29 +57,20 @@ const ViewSet = () => {
     },
   ];
   const user = useSelector((state) => state.user);
+  const setDetail = useSelector((state) => state.studySet?.setDetail);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await handleGetSetDetail(setId);
-        setStudySet(response.studySet);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        if (error.response.status === 404) {
-          navigate('/set-not-found');
-        }
-      }
-    };
+    dispatch(getSetDetail(setId));
 
-    fetchData();
-  }, [setId]);
+    //error 404 not resolve. It can resolve after
+  }, [setId, dispatch]);
 
   useEffect(() => {
-    setListFlashCard(studySet?.FlashCards);
-  }, [studySet]);
+    setListFlashCard(setDetail?.FlashCards);
+  }, [setDetail]);
 
   const handleDeleteSet = () => {
-    const payload = { id: studySet.id };
+    const payload = { id: setDetail.id };
     dispatch(deleteStudySet(payload));
     navigate('/');
   };
@@ -88,13 +78,14 @@ const ViewSet = () => {
   return (
     <div className={cx('container')}>
       <Header />
-      <h1 className={cx('title')}>{studySet.title}</h1>
+      <h1 className={cx('title')}>{setDetail.title}</h1>
       <div className={cx('funtion')}>
         {funtionButtons.map((button, index) => {
           return (
-            <Button
+            <FeatureButton
               logo={button.logo}
               text={button.text}
+              setId={setId}
               key={index}
             />
           );
@@ -112,10 +103,10 @@ const ViewSet = () => {
           <img className={cx('avatar')} src={noImage} alt="avatar" />
           <span className={cx('text')}>Created by</span>
           <span className={cx('userName')}>
-            {studySet?.User?.userName}
+            {setDetail?.User?.userName}
           </span>
         </div>
-        {user.userName === studySet?.User?.userName ? (
+        {user.userName === setDetail?.User?.userName ? (
           <div className={cx('action')}>
             <button className={cx('edit-btn')}>
               <FontAwesomeIcon icon={faPen} />
@@ -131,14 +122,14 @@ const ViewSet = () => {
       </div>
 
       <span className={cx('description')}>
-        {studySet.description}
+        {setDetail.description}
       </span>
 
       <span
         className={cx('information')}
-      >{`Terms in this set (${studySet?.FlashCards?.length})`}</span>
+      >{`Terms in this set (${setDetail?.FlashCards?.length})`}</span>
       {/*Display list Term*/}
-      {studySet.FlashCards?.map((card, index) => {
+      {setDetail.FlashCards?.map((card, index) => {
         return (
           <Term
             term={card.front}

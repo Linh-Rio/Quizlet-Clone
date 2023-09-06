@@ -3,7 +3,9 @@ import {
   handleGetSet,
   handleCreateSet,
   handleDeleteSet,
+  handleGetSetDetail,
 } from '../../services/studySetService';
+// import { useNavigate } from 'react-router-dom';
 
 export const getStudySet = createAsyncThunk(
   'studySet/getStudySet',
@@ -41,10 +43,25 @@ export const deleteStudySet = createAsyncThunk(
   },
 );
 
+export const getSetDetail = createAsyncThunk(
+  'studySet/getSetDetail',
+  async (id) => {
+    // const navigate = useNavigate();
+    try {
+      const response = await handleGetSetDetail(id);
+
+      return response.studySet;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+);
+
 const studySetSlice = createSlice({
   name: 'studySet',
   initialState: {
     listSets: [],
+    setDetail: {},
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -73,6 +90,12 @@ const studySetSlice = createSlice({
         listSets: state.listSets.filter(
           (studySet) => studySet.id !== idForDelete,
         ),
+      };
+    });
+    builder.addCase(getSetDetail.fulfilled, (state, action) => {
+      return {
+        ...state,
+        setDetail: action.payload,
       };
     });
   },

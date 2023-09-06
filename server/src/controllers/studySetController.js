@@ -80,9 +80,18 @@ const handleGetSetDetail = async (req, res) => {
   });
 };
 
+const handleGetSearch = async (req, res) => {
+  const result = await studySetservice.handleGetSearchService(req.body);
+
+  return res.status(200).json({
+    result: result,
+  });
+};
+
 module.exports = {
   handleCreateSet,
   handleGetSet,
   handleDeleteSet,
   handleGetSetDetail,
+  handleGetSearch,
 };

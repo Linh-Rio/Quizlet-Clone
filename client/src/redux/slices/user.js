@@ -18,14 +18,24 @@ const userSlice = createSlice({
         'profile',
         JSON.stringify({ ...action?.payload }),
       );
-      state.id = action.payload.id;
-      state.email = action.payload.email;
-      state.userName = action.payload.userName;
-      state.firstName = action.payload.firstName;
-      state.lastName = action.payload.lastName;
-      state.birthday = action.payload.birthday;
-      state.avatar = action.payload.avatar;
-      state.token = action.payload.token;
+      const {
+        id,
+        email,
+        userName,
+        firstName,
+        lastName,
+        birthday,
+        avatar,
+        token,
+      } = action.payload;
+      state.id = id;
+      state.email = email;
+      state.userName = userName;
+      state.firstName = firstName;
+      state.lastName = lastName;
+      state.birthday = birthday;
+      state.avatar = avatar;
+      state.token = token;
     },
     logoutSuccess: (state, action) => {
       localStorage.clear();

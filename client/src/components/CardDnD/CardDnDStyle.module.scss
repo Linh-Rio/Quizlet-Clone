@@ -1,0 +1,12 @@
+.card {
+  width: fit-content;
+  max-width: 270px;
+  background-color: white;
+  padding: 1.6rem 1.6rem 0 1.6rem;
+  border: 3px solid #d9dde8;
+  cursor: move;
+  white-space: pre-wrap;
+  text-align: left;
+  overflow: scroll;
+  position: absolute;
+}

@@ -9,6 +9,7 @@ let initWebRoutes = (app) => {
   router.post("/api/login", userController.handleLogin);
   router.post("/api/create-set", studySetController.handleCreateSet);
 
+  router.get("/api/search", studySetController.handleGetSearch);
   router.get("/api/study-set", studySetController.handleGetSet);
   router.get("/api/set-detail/", studySetController.handleGetSetDetail);
 

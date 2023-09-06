@@ -1,4 +1,5 @@
 import db from "../models";
+const { Op } = require("sequelize");
 
 let handleCreateSet = async (data) => {
   return new Promise(async (resolve, reject) => {
@@ -209,9 +210,47 @@ let studySetIsExist = (id) => {
   });
 };
 
+const handleGetSearchService = ({ query }) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const result = {};
+      let resultVocabset = await db.VocabSet.findAll({
+        where: {
+          title: {
+            [Op.like]: `%${query}%`,
+          },
+        },
+      });
+
+      let resultFlashcard = await db.FlashCard.findAll({
+        where: {
+          [Op.or]: {
+            front: { [Op.like]: `%${query}%` },
+            back: { [Op.like]: `%${query}%` },
+          },
+        },
+      });
+
+      let resultUser = await db.User.findAll({
+        where: {
+          userName: { [Op.like]: `%${query}%` },
+        },
+      });
+      result.FlashCard = resultFlashcard;
+      result.VocabSet = resultVocabset;
+      result.User = resultUser;
+
+      resolve(result);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
 module.exports = {
   handleCreateSet,
   handleGetSet,
   handleDeleteSet,
   getSetDetailService,
+  handleGetSearchService,
 };

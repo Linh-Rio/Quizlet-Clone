@@ -1,0 +1,170 @@
+.container {
+  margin-top: 64px;
+}
+
+//side-bar
+
+.side-bar {
+  width: fit-content;
+  height: calc(100vh - 64px);
+  padding: 1.6rem;
+  font-size: 1.8rem;
+  background-color: #f6f7fb;
+  color: #2e3856;
+  box-shadow: 0 0.25rem 1.25rem #00000014;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.back {
+  width: 100%;
+  padding: 1.8rem 0;
+  background: none;
+  border: none;
+  color: #2e3856;
+  font-size: 2rem;
+  text-align: left;
+  font-weight: 500;
+  cursor: pointer;
+}
+.back:hover .back-arrow {
+  color: #ffcd1f;
+}
+
+.back-arrow {
+  color: #3ccfcf;
+}
+
+.page-name {
+  width: 100%;
+  padding: 3rem 0;
+  display: flex;
+  align-items: center;
+}
+.logo {
+  font-size: 3.6rem;
+  color: #4255ff;
+}
+.text {
+  font-weight: 500;
+}
+.time-counter {
+}
+.counter-clock {
+  color: #4255ff;
+  font-size: 3.2rem;
+  font-weight: bold;
+}
+
+// modal
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(143, 146, 156, 0.5);
+  z-index: 101;
+}
+
+.modal-container {
+  position: absolute;
+  top: calc((100% - 336px) / 4);
+  left: calc((100% - 600px) / 2);
+  width: 600px;
+  height: 336px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 1.8rem;
+  border-radius: 19px;
+  border: none;
+}
+
+.modal-container:focus-visible {
+  outline: none;
+}
+
+.modal-content {
+  color: #2f3856;
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.title-game {
+  padding: 2rem 0;
+  font-size: 3.2rem;
+  font-weight: bold;
+}
+
+.description {
+  padding: 1rem 0;
+  font-size: 1.8rem;
+}
+
+.btn-start,
+.back-btn,
+.play-again-btn {
+  margin-top: 2rem;
+  padding: 24px 80px;
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  background-color: #3ccfcf;
+  border: none;
+  border-radius: 7px;
+}
+
+.btn-start:hover {
+  background-color: #28a7a7;
+}
+
+//match area
+
+.body-container {
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.match-container {
+  width: 90vw;
+  position: relative;
+}
+
+// result container
+
+.result-container {
+  padding-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  color: #2d3754;
+}
+.score {
+  color: #2d3754;
+  font-weight: lighter;
+}
+.back-btn {
+  background-color: white;
+  color: #2d3754;
+  padding: 2rem;
+  margin-right: 3rem;
+}
+.back-btn:hover {
+  background-color: #ffcd1f;
+}
+.play-again-btn {
+  margin: 0;
+  padding: 2rem;
+}
+
+.play-again-btn:hover {
+  background-color: #28a7a7;
+}

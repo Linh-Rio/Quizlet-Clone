@@ -1,0 +1,39 @@
+.container {
+  padding-top: 100px;
+  margin-bottom: 108px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.next-question {
+  width: 100%;
+  background-color: white;
+  color: #929bb2;
+  font-size: 2.4rem;
+  padding: 2rem 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+}
+
+.btn-continue {
+  padding: 1.6rem 1.8rem;
+  margin-top: 1.6rem;
+  color: white;
+  font-size: 1.8rem;
+  background-color: #4255ff;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.btn-continue:hover {
+  background-color: #4138d2;
+}
+
+.hidden {
+  display: none;
+}

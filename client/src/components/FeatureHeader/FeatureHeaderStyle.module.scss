@@ -1,0 +1,102 @@
+.header-container {
+  width: 100%;
+  height: 64px;
+  background-color: white;
+  padding: 0 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+}
+
+.tippy-box {
+  background-color: white;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0.25rem 1rem 0 #2e385614;
+}
+
+.feature-container,
+.nav {
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.feature-container {
+  border-bottom: 2px solid #f6f7fb;
+}
+
+.feature {
+  width: 100%;
+  padding: 0 3rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.feature:hover,
+.nav:hover {
+  background-color: #f6f7fb;
+}
+
+.logo,
+.text,
+.nav-home {
+  font-size: 2.6rem;
+}
+
+.logo {
+  width: 64px;
+  color: #0089f9;
+  text-align: center;
+}
+.text,
+.nav-home {
+  min-width: 120px;
+  color: #57637e;
+  padding: 0 1.8rem;
+}
+
+.nav-home {
+  text-align: center;
+}
+
+.main-feature {
+  width: fit-content;
+  height: 64px;
+  padding: 0;
+  margin: 0;
+}
+
+.title {
+  min-width: 400px;
+  // margin-right: 3rem;
+  text-align: center;
+  font-size: 2.6rem;
+  cursor: pointer;
+}
+
+.title:hover {
+  color: #0089f9;
+}
+
+.cancel-icon {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #57637e;
+  margin: 0 113px;
+  border-radius: 9px;
+  text-align: center;
+  font-size: 2.8rem;
+  background-color: white;
+  cursor: pointer;
+}
+
+.cancel-icon:hover {
+  background-color: #f6f7fb;
+}
